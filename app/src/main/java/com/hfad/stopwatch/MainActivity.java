@@ -93,10 +93,10 @@ public class MainActivity extends AppCompatActivity {
                     //Dr R included these for testing.
                     //Comment them out when you understand
                     //running, offset, stopwatch.getBase()
-                    System.out.println("PAUSE:");
-                    System.out.println("\trunning: " + running);
-                    System.out.println("\toffset: " + offset);
-                    System.out.println("\tbase: " + stopwatch.getBase());
+                    //System.out.println("PAUSE:");
+                    //System.out.println("\trunning: " + running);
+                    //System.out.println("\toffset: " + offset);
+                    //System.out.println("\tbase: " + stopwatch.getBase());
                 }
             }
         });
@@ -112,12 +112,35 @@ public class MainActivity extends AppCompatActivity {
                 //Dr R included these for testing.
                 //Comment them out when you understand
                 //running, offset, stopwatch.getBase()
-                System.out.println("RESET:");
-                System.out.println("\trunning: " + running);
-                System.out.println("\toffset: " + offset);
-                System.out.println("\tbase: " + stopwatch.getBase());
+                //System.out.println("RESET:");
+                //System.out.println("\trunning: " + running);
+                //System.out.println("\toffset: " + offset);
+                //System.out.println("\tbase: " + stopwatch.getBase());
             }
         });
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        if (running)
+        {
+            saveOffset();
+            stopwatch.stop();
+        }
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if (running)
+        {
+            setBaseTime();
+            stopwatch.start();
+            offset = 0;
+        }
     }
 
     @Override
